@@ -9,9 +9,11 @@ case $# in
     1) n=$1;;
     *) usage ;;
 esac
-
-
-echo 'algorithm;mud;map_width;map_height;map_size;turns' > stats.csv
+fn=stats.csv
+if [ -r $fn ]
+then echo "### preexisting $fn ###" >&2; exit
+fi
+echo 'algorithm;mud;map_width;map_height;map_size;turns' > $fn
 while read mud 
 do
     while read width 
